@@ -1,0 +1,13 @@
+;  Enter your initialization code here
+
+Do iDownloads.$define(iDownloadID,iDownloadPath,iDownloadMsg)
+
+Do iMyList.$define(iMyCol)
+Do iMyList.$add('Days of the Week')
+Do iMyList.$add('Monday')
+Do iMyList.$add('Tuesday')
+Do iMyList.$add('Wednesday')
+Do iMyList.$add('Thursday')
+Do iMyList.$add('Friday')
+Do iMyList.$add('Saturday')
+Do iMyList.$add('Sunday')

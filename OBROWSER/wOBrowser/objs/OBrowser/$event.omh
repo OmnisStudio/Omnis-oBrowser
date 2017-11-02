@@ -1,0 +1,48 @@
+On evBrowserOpenUrl
+	If sys(6)='W'|sys(6)='N'
+		Launch program ,[pUrl]
+	Else If sys(6)='X'
+		Calculate lScript as con('open location ',chr(34),pUrl,chr(34))
+		Do $runapplescript(lScript)
+	End If
+	
+On evBrowserFrameLoadError
+	OK message Bad URL {[pErrorText]}
+	
+On evBrowserLoadStateChange
+	Calculate iCurrentUrl as $cinst.$objs.OBrowser.$currenturl
+	
+	Do $cinst.$objs.Back.$enabled.$assign($cinst.$objs.OBrowser.$cangoback)
+	Do $cinst.$objs.Forward.$enabled.$assign($cinst.$objs.OBrowser.$cangoforward)
+	Do $cinst.$redraw()
+	
+On evBrowserStartDownload
+	Calculate lDestPath as pSuggestedName
+	Do FileOps.$putfilename(lDestPath) Returns lFlag
+	If lFlag
+		Do $cinst.$objs.OBrowser.$startdownload(pDownloadId,lDestPath)
+		
+		Do FileOps.$splitpathname(lDestPath,,,lDestFileName,lDestFileExt)
+		Do iDownloads.$add(pDownloadId,con(lDestFileName,lDestFileExt),'')
+		Do $cinst.$objs.TabPane.$currenttab.$assign(3)     ;; show downloads tab
+		Do $cinst.$redraw()
+	Else
+		Do $cinst.$objs.OBrowser.$canceldownload(pDownloadId)
+	End If
+	
+On evBrowserDownloadProgress
+	Do iDownloads.$search(iDownloadID=pDownloadId,kTrue,kFalse,kFalse,kFalse) Returns lLine
+	If iDownloads.$line>0
+		Calculate iDownloads.iDownloadMsg as con(int((100/pTotalBytesExpected)*pBytesReceived),'%')
+		Do iDownloads.$line.$assign(0)
+		Do $cinst.$redraw()
+	End If
+	
+On evBrowserFinishedDownload
+	Do iDownloads.$search(iDownloadID=pDownloadId,kTrue,kFalse,kFalse,kFalse) Returns lLine
+	If iDownloads.$line>0
+		Calculate iDownloads.iDownloadMsg as '100%'
+		
+		Do iDownloads.$loadcols()
+		OK message Download Complete {[iDownloadPath] Downloaded.}
+	End If

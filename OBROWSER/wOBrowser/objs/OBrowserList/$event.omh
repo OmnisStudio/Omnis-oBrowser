@@ -1,0 +1,4 @@
+On evClick
+	;  Do iList.$line.$assign(pLineNumber)
+	;  Do iList.[iList.$line].$selected.$assign(not(iList.[iList.$line].$selected))
+	;  Do $cinst.$redraw()

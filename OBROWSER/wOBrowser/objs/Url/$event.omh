@@ -1,0 +1,5 @@
+On evKey
+	If pSystemKey=28|pSystemKey=29     ;; return or enter key pressed
+		Process event and continue
+		Do $cinst.$objs.OBrowser.$urlorcontrolname.$assign(iCurrentUrl)
+	End If

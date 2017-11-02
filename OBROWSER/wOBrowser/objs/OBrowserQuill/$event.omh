@@ -1,0 +1,5 @@
+On evCallMethodDone
+	If pUniqueId=iID
+		Calculate iData as pReturn
+		OK message evCallMethodDone {[iData]}
+	End If

@@ -1,0 +1,30 @@
+{
+	"ident": 1029,
+	"order": 16388,
+	"objtype": "kText",
+	"properties": {
+		"align": "kLeftJst",
+		"backcolor": "kColorBackFill",
+		"backpattern": 15,
+		"designactive": true,
+		"edgefloat": "kEFright",
+		"fieldstyle": "LabelText",
+		"font": 5,
+		"fontsize": 10,
+		"fontstyle": "kPlain",
+		"forecolor": "kColorForeFill",
+		"height": 38,
+		"left": 5,
+		"objlink": 196609,
+		"text": {
+			"type": 14,
+			"calc": "Shows the progress of any downloads initiated via the Browser tab."
+		},
+		"textcolor": "kColorWindowText",
+		"top": 5,
+		"userinfo": "",
+		"vertcentertext": false,
+		"visible": true,
+		"width": 580
+	}
+}
